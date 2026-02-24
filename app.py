@@ -11,7 +11,7 @@ st.set_page_config(page_title="Personal Fitness Hub", layout="wide")
 
 # Connect to Google Sheets
 # Note: You'll need to add your Sheet URL to .streamlit/secrets.toml or Streamlit Cloud
-url = "YOUR_GOOGLE_SHEET_URL_HERE"
+url = "https://docs.google.com/spreadsheets/d/11lsWHou6WfRDelu87xEgI5mCdiherYTxkEvC5_sG4SM/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 st.title("🏃‍♂️ My Fitness Dashboard")
@@ -56,4 +56,5 @@ elif choice == "Weight Tracker":
     # Visualization
     df_weight = conn.read(spreadsheet=url, worksheet="Weight")
     if not df_weight.empty:
+
         st.line_chart(df_weight.set_index("Date")["Weight"])
