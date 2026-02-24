@@ -39,7 +39,7 @@ if choice == "Log Calories":
             updated_df = pd.concat([existing_data, new_data], ignore_index=True)
             
             # Write back to Google Sheets
-            conn.update(spreadsheet=url, worksheet="Calories", data=updated_df)
+            conn.update(spreadsheet=url, worksheet="Calories", data=updated_df, ttl=0)
             st.success("Meal Logged!")
 
 # --- 2. WEIGHT TRACKER ---
@@ -58,5 +58,6 @@ elif choice == "Weight Tracker":
     if not df_weight.empty:
 
         st.line_chart(df_weight.set_index("Date")["Weight"])
+
 
 
