@@ -11,7 +11,7 @@ st.set_page_config(page_title="Personal Fitness Hub", layout="wide")
 
 # Connect to Google Sheets
 # Note: You'll need to add your Sheet URL to .streamlit/secrets.toml or Streamlit Cloud
-url = "https://docs.google.com/spreadsheets/d/11lsWHou6WfRDelu87xEgI5mCdiherYTxkEvC5_sG4SM/edit?usp=sharing"
+url = "https://docs.google.com/spreadsheets/d/11lsWHou6WfRDelu87xEgI5mCdiherYTxkEvC5_sG4SM/"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 st.title("🏃‍♂️ My Fitness Dashboard")
@@ -35,7 +35,7 @@ if choice == "Log Calories":
             new_data = pd.DataFrame([{"Date": str(date), "Item": meal, "Calories": cals, "Protein": protein}])
             
             # Fetch existing data and append
-            existing_data = conn.read(spreadsheet= "https://docs.google.com/spreadsheets/d/11lsWHou6WfRDelu87xEgI5mCdiherYTxkEvC5_sG4SM/edit?usp=sharing", worksheet="Calories")
+            existing_data = conn.read(spreadsheet=url, worksheet="Calories")
             updated_df = pd.concat([existing_data, new_data], ignore_index=True)
             
             # Write back to Google Sheets
@@ -58,4 +58,5 @@ elif choice == "Weight Tracker":
     if not df_weight.empty:
 
         st.line_chart(df_weight.set_index("Date")["Weight"])
+
 
